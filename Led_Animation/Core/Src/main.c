@@ -97,9 +97,7 @@ static void set_segments_by_mask(uint8_t mask, uint8_t digit_idx);
 
 static void init_display(void);
 
-static void demo_ex3(int counter);
 static void demo_ex4(int counter);
-static void demo_ex5(int counter);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -144,9 +142,7 @@ int main(void) {
 		if (counter <= 0) {
 			counter = 100;
 		}
-//		demo_ex3(counter);
-//		demo_ex4(counter);
-		demo_ex5(counter);
+		demo_ex4(counter);
 		HAL_Delay(1000);
 		counter--;
 		/* USER CODE END WHILE */
@@ -311,28 +307,6 @@ static void init_display() {
 	update_7seg(1, 10);
 }
 
-static void demo_ex3(int counter) {
-	counter %= 10;
-	switch (counter) {
-	case 0:
-		set_traffic_light(0, RED);
-		set_traffic_light(1, GREEN);
-		break;
-	case 7:
-		set_traffic_light(1, YELLOW);
-		break;
-	case 5:
-		set_traffic_light(0, GREEN);
-		set_traffic_light(1, RED);
-		break;
-	case 2:
-		set_traffic_light(0, YELLOW);
-		break;
-	default:
-		break;
-	}
-}
-
 static void demo_ex4(int counter) {
 	counter %= 10;
 	counter = 9 - counter;
@@ -372,59 +346,6 @@ static void demo_ex4(int counter) {
 	}
 }
 
-static void demo_ex5(int counter) {
-	counter %= 10;
-	switch (counter) {
-	case 0:
-		set_traffic_light(0, RED);
-		set_traffic_light(1, GREEN);
-		update_7seg(0, 5);
-		update_7seg(1, 3);
-		break;
-	case 9:
-		update_7seg(0, 4);
-		update_7seg(1, 2);
-		break;
-	case 8:
-		update_7seg(0, 3);
-		update_7seg(1, 1);
-		break;
-	case 7:
-		set_traffic_light(1, YELLOW);
-		update_7seg(0, 2);
-		update_7seg(1, 2);
-		break;
-	case 6:
-		update_7seg(0, 1);
-		update_7seg(1, 1);
-		break;
-	case 5:
-		set_traffic_light(0, GREEN);
-		set_traffic_light(1, RED);
-		update_7seg(0, 3);
-		update_7seg(1, 5);
-		break;
-	case 4:
-		update_7seg(0, 2);
-		update_7seg(1, 4);
-		break;
-	case 3:
-		update_7seg(0, 1);
-		update_7seg(1, 3);
-		break;
-	case 2:
-		set_traffic_light(0, YELLOW);
-		update_7seg(0, 2);
-		update_7seg(1, 2);
-		break;
-	case 1:
-		update_7seg(0, 1);
-		update_7seg(1, 1);
-		break;
-	default:
-		break;
-	}
-}
 /* USER CODE END 4 */
 
 /**
