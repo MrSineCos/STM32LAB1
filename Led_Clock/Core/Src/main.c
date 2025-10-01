@@ -108,7 +108,6 @@ int main(void)
     }
   idx = 0;
 
-  //Ex10
   int hour = 0;
   int min = 0;
   int sec = 0;
@@ -120,20 +119,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
-	  //Ex6
-//	  if(idx > 11){
-//		  idx = 0;
-//	  }
-//	  HAL_GPIO_WritePin(LED_PORTS[idx], LED_PINS[idx], RESET);
-//	  HAL_Delay(1000);
-//	  HAL_GPIO_WritePin(LED_PORTS[idx], LED_PINS[idx], SET);
-//	  idx++;
-	  ////////---------Ex10--------//////////
 	  setNumberOnClock(hour);
 	  setNumberOnClock(min/5);
 	  setNumberOnClock(sec/5);
-	  HAL_Delay(10);	//tăng tốc độ kiểm tra kim giờ
+	  HAL_Delay(1000);
 	  sec++;
 	  if(sec >= 60){
 		  sec = 0;
