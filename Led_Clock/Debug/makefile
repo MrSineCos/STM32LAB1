@@ -64,8 +64,8 @@ all: main-build
 main-build: Led_Clock.elf secondary-outputs
 
 # Tool invocations
-Led_Clock.elf: $(OBJS) $(USER_OBJS) C:\Users\ADMIN\Documents\STM32CubeIDE\Led_Clock\STM32F103C6UX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Led_Clock.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\ADMIN\Documents\STM32CubeIDE\Led_Clock\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Led_Clock.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Led_Clock.elf: $(OBJS) $(USER_OBJS) D:\MCU\LAB\LAB1\Code\Led_Clock\STM32F103C6UX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Led_Clock.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\MCU\LAB\LAB1\Code\Led_Clock\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Led_Clock.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
