@@ -104,23 +104,6 @@ int main(void) {
 	/* USER CODE BEGIN WHILE */
 	int cnt = 0;
 	while (1) {
-		//--------------Ex1--------------//
-//		switch(cnt) {
-//			case 4:
-//			cnt = 0;
-//			case 0:
-//			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
-//			HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
-//			break;
-//			case 2:
-//			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
-//			HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
-//			break;
-//			default: break;
-//		}
-//		cnt++;
-//		HAL_Delay(1000);
-		//--------------Ex2--------------//
 		switch(cnt) {
 			case 10:
 			cnt = 0;
