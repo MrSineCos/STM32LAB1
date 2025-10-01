@@ -32,12 +32,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define COLOR_COUNT 3
-
-// Thêm enum để quản lý màu sắc
-enum TrafficLightColor {
-	RED, YELLOW, GREEN
-};
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -48,18 +42,12 @@ enum TrafficLightColor {
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-static const uint16_t LED_PINS[COLOR_COUNT] = {
-LED_RED_Pin, LED_YELLOW_Pin, LED_GREEN_Pin };
-
-static GPIO_TypeDef *const LED_PORTS[COLOR_COUNT] = {LED_RED_GPIO_Port,
-		LED_YELLOW_GPIO_Port, LED_GREEN_GPIO_Port};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
-static void set_traffic_light(enum TrafficLightColor color);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -104,35 +92,17 @@ int main(void) {
 	/* USER CODE BEGIN WHILE */
 	int cnt = 0;
 	while (1) {
-		//--------------Ex1--------------//
-//		switch(cnt) {
-//			case 4:
-//			cnt = 0;
-//			case 0:
-//			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
-//			HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
-//			break;
-//			case 2:
-//			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
-//			HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
-//			break;
-//			default: break;
-//		}
-//		cnt++;
-//		HAL_Delay(1000);
-		//--------------Ex2--------------//
 		switch(cnt) {
-			case 10:
+			case 4:
 			cnt = 0;
 			case 0:
-				set_traffic_light(GREEN);
-				break;
-			case 3:
-				set_traffic_light(YELLOW);
-				break;
-			case 5:
-				set_traffic_light(RED);
-				break;
+			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
+			HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+			break;
+			case 2:
+			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+			HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+			break;
 			default: break;
 		}
 		cnt++;
@@ -200,25 +170,6 @@ static void MX_GPIO_Init(void) {
 }
 
 /* USER CODE BEGIN 4 */
-static void set_traffic_light(enum TrafficLightColor color) {
-	// Tắt hết các đèn của cột đèn 'index' trước
-	HAL_GPIO_WritePin(LED_PORTS[RED], LED_PINS[RED], GPIO_PIN_SET);
-	HAL_GPIO_WritePin(LED_PORTS[YELLOW], LED_PINS[YELLOW], GPIO_PIN_SET);
-	HAL_GPIO_WritePin(LED_PORTS[GREEN], LED_PINS[GREEN], GPIO_PIN_SET);
-
-	// Bật đèn mong muốn
-	switch (color) {
-	case RED:
-		HAL_GPIO_WritePin(LED_PORTS[RED], LED_PINS[RED], GPIO_PIN_RESET);
-		break;
-	case YELLOW:
-		HAL_GPIO_WritePin(LED_PORTS[YELLOW], LED_PINS[YELLOW], GPIO_PIN_RESET);
-		break;
-	case GREEN:
-		HAL_GPIO_WritePin(LED_PORTS[GREEN], LED_PINS[GREEN], GPIO_PIN_RESET);
-		break;
-	}
-}
 /* USER CODE END 4 */
 
 /**
