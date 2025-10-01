@@ -97,8 +97,6 @@ static void set_segments_by_mask(uint8_t mask, uint8_t digit_idx);
 
 static void init_display(void);
 
-static void demo_ex3(int counter);
-static void demo_ex4(int counter);
 static void demo_ex5(int counter);
 /* USER CODE END PFP */
 
@@ -144,8 +142,6 @@ int main(void) {
 		if (counter <= 0) {
 			counter = 100;
 		}
-//		demo_ex3(counter);
-//		demo_ex4(counter);
 		demo_ex5(counter);
 		HAL_Delay(1000);
 		counter--;
@@ -309,67 +305,6 @@ static void init_display() {
 	// Tắt hết 2 led 7 đoạn
 	update_7seg(0, 10); // Gửi số > 9 để tắt
 	update_7seg(1, 10);
-}
-
-static void demo_ex3(int counter) {
-	counter %= 10;
-	switch (counter) {
-	case 0:
-		set_traffic_light(0, RED);
-		set_traffic_light(1, GREEN);
-		break;
-	case 7:
-		set_traffic_light(1, YELLOW);
-		break;
-	case 5:
-		set_traffic_light(0, GREEN);
-		set_traffic_light(1, RED);
-		break;
-	case 2:
-		set_traffic_light(0, YELLOW);
-		break;
-	default:
-		break;
-	}
-}
-
-static void demo_ex4(int counter) {
-	counter %= 10;
-	counter = 9 - counter;
-	switch (counter) {
-	case 0:
-		update_7seg(0, 0);
-		break;
-	case 1:
-		update_7seg(0, 1);
-		break;
-	case 2:
-		update_7seg(0, 2);
-		break;
-	case 3:
-		update_7seg(0, 3);
-		break;
-	case 4:
-		update_7seg(0, 4);
-		break;
-	case 5:
-		update_7seg(0, 5);
-		break;
-	case 6:
-		update_7seg(0, 6);
-		break;
-	case 7:
-		update_7seg(0, 7);
-		break;
-	case 8:
-		update_7seg(0, 8);
-		break;
-	case 9:
-		update_7seg(0, 9);
-		break;
-	default:
-		break;
-	}
 }
 
 static void demo_ex5(int counter) {
