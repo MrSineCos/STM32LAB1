@@ -60,8 +60,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 void  clearAllClock(void);
-void setNumberOnClock(int num);
-void clearNumberOnClock(int num);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -98,20 +97,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  int idx = 0;
-  while (idx <= 11)
-    {
-      /* USER CODE END WHILE */
-  	  HAL_GPIO_WritePin(LED_PORTS[idx], LED_PINS[idx], SET);
-  	  idx++;
-      /* USER CODE BEGIN 3 */
-    }
-  idx = 0;
-
-  //Ex10
-  int hour = 0;
-  int min = 0;
-  int sec = 0;
 
   /* USER CODE END 2 */
 
@@ -121,32 +106,6 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-	  //Ex6
-//	  if(idx > 11){
-//		  idx = 0;
-//	  }
-//	  HAL_GPIO_WritePin(LED_PORTS[idx], LED_PINS[idx], RESET);
-//	  HAL_Delay(1000);
-//	  HAL_GPIO_WritePin(LED_PORTS[idx], LED_PINS[idx], SET);
-//	  idx++;
-	  ////////---------Ex10--------//////////
-	  setNumberOnClock(hour);
-	  setNumberOnClock(min/5);
-	  setNumberOnClock(sec/5);
-	  HAL_Delay(10);	//tăng tốc độ kiểm tra kim giờ
-	  sec++;
-	  if(sec >= 60){
-		  sec = 0;
-		  min++;
-	  }
-	  if(min >= 60){
-		  min = 0;
-		  hour++;
-	  }
-	  if(hour >= 12){
-		  hour = 0;
-	  }
-	  clearAllClock();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -223,14 +182,6 @@ void clearAllClock() {
 	 {
 		 HAL_GPIO_WritePin(LED_PORTS[i], LED_PINS[i], SET);
 	 }
-}
-
-void setNumberOnClock(int num){
-	HAL_GPIO_WritePin(LED_PORTS[num], LED_PINS[num], RESET);
-}
-
-void clearNumberOnClock(int num){
-	HAL_GPIO_WritePin(LED_PORTS[num], LED_PINS[num], RESET);
 }
 /* USER CODE END 4 */
 
