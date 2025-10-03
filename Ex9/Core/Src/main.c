@@ -96,15 +96,34 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  int idx = 0;
+  HAL_Delay(1000);
+  while(idx <= 11)
+  {
+	  HAL_GPIO_WritePin(LED_PORTS[idx], LED_PINS[idx], RESET);
+	  idx++;
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  idx = 0;
   while (1)
   {
     /* USER CODE END WHILE */
-
+	 if(idx >= 12)
+	 {
+		 idx = 0;
+		  while(idx <= 11)
+		  {
+			  HAL_GPIO_WritePin(LED_PORTS[idx], LED_PINS[idx], RESET);
+			  idx++;
+		  }
+		  idx = 0;
+	 }
+	 clearNumberOnClock(idx);
+	 idx++;
+	 HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -177,7 +196,7 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void clearNumberOnClock(int num){
-	HAL_GPIO_WritePin(LED_PORTS[num], LED_PINS[num], RESET);
+	HAL_GPIO_WritePin(LED_PORTS[num], LED_PINS[num], SET);
 }
 /* USER CODE END 4 */
 
