@@ -108,8 +108,8 @@ int main(void)
     }
   idx = 0;
 
-  int hour = 0;
-  int min = 0;
+  int hour = 1;
+  int min = 55;
   int sec = 0;
 
   /* USER CODE END 2 */
@@ -122,7 +122,7 @@ int main(void)
 	  setNumberOnClock(hour);
 	  setNumberOnClock(min/5);
 	  setNumberOnClock(sec/5);
-	  HAL_Delay(1000);
+	  HAL_Delay(10);
 	  sec++;
 	  if(sec >= 60){
 		  sec = 0;

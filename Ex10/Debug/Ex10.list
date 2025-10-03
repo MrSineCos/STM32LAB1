@@ -1,5 +1,5 @@
 
-Led_Clock.elf:     file format elf32-littlearm
+Ex10.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
@@ -39,11 +39,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_line   0000454b  00000000  00000000  00039cfc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00079a6b  00000000  00000000  0003e247  2**0
+ 18 .debug_str    00079a30  00000000  00000000  0003e247  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000b7cb2  2**0
+ 19 .comment      00000053  00000000  00000000  000b7c77  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000d9c  00000000  00000000  000b7d08  2**2
+ 20 .debug_frame  00000d9c  00000000  00000000  000b7ccc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -139,11 +139,11 @@ int main(void)
  8000188:	2300      	movs	r3, #0
  800018a:	60fb      	str	r3, [r7, #12]
 
-  int hour = 0;
- 800018c:	2300      	movs	r3, #0
+  int hour = 1;
+ 800018c:	2301      	movs	r3, #1
  800018e:	60bb      	str	r3, [r7, #8]
-  int min = 0;
- 8000190:	2300      	movs	r3, #0
+  int min = 55;
+ 8000190:	2337      	movs	r3, #55	; 0x37
  8000192:	607b      	str	r3, [r7, #4]
   int sec = 0;
  8000194:	2300      	movs	r3, #0
@@ -174,49 +174,50 @@ int main(void)
  80001be:	1ad3      	subs	r3, r2, r3
  80001c0:	4618      	mov	r0, r3
  80001c2:	f000 f8b7 	bl	8000334 <setNumberOnClock>
-	  HAL_Delay(1000);
- 80001c6:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
- 80001ca:	f000 f9b9 	bl	8000540 <HAL_Delay>
+	  HAL_Delay(10);
+ 80001c6:	200a      	movs	r0, #10
+ 80001c8:	f000 f9ba 	bl	8000540 <HAL_Delay>
 	  sec++;
- 80001ce:	683b      	ldr	r3, [r7, #0]
- 80001d0:	3301      	adds	r3, #1
- 80001d2:	603b      	str	r3, [r7, #0]
+ 80001cc:	683b      	ldr	r3, [r7, #0]
+ 80001ce:	3301      	adds	r3, #1
+ 80001d0:	603b      	str	r3, [r7, #0]
 	  if(sec >= 60){
- 80001d4:	683b      	ldr	r3, [r7, #0]
- 80001d6:	2b3b      	cmp	r3, #59	; 0x3b
- 80001d8:	dd04      	ble.n	80001e4 <main+0x98>
+ 80001d2:	683b      	ldr	r3, [r7, #0]
+ 80001d4:	2b3b      	cmp	r3, #59	; 0x3b
+ 80001d6:	dd04      	ble.n	80001e2 <main+0x96>
 		  sec = 0;
- 80001da:	2300      	movs	r3, #0
- 80001dc:	603b      	str	r3, [r7, #0]
+ 80001d8:	2300      	movs	r3, #0
+ 80001da:	603b      	str	r3, [r7, #0]
 		  min++;
- 80001de:	687b      	ldr	r3, [r7, #4]
- 80001e0:	3301      	adds	r3, #1
- 80001e2:	607b      	str	r3, [r7, #4]
+ 80001dc:	687b      	ldr	r3, [r7, #4]
+ 80001de:	3301      	adds	r3, #1
+ 80001e0:	607b      	str	r3, [r7, #4]
 	  }
 	  if(min >= 60){
- 80001e4:	687b      	ldr	r3, [r7, #4]
- 80001e6:	2b3b      	cmp	r3, #59	; 0x3b
- 80001e8:	dd04      	ble.n	80001f4 <main+0xa8>
+ 80001e2:	687b      	ldr	r3, [r7, #4]
+ 80001e4:	2b3b      	cmp	r3, #59	; 0x3b
+ 80001e6:	dd04      	ble.n	80001f2 <main+0xa6>
 		  min = 0;
- 80001ea:	2300      	movs	r3, #0
- 80001ec:	607b      	str	r3, [r7, #4]
+ 80001e8:	2300      	movs	r3, #0
+ 80001ea:	607b      	str	r3, [r7, #4]
 		  hour++;
- 80001ee:	68bb      	ldr	r3, [r7, #8]
- 80001f0:	3301      	adds	r3, #1
- 80001f2:	60bb      	str	r3, [r7, #8]
+ 80001ec:	68bb      	ldr	r3, [r7, #8]
+ 80001ee:	3301      	adds	r3, #1
+ 80001f0:	60bb      	str	r3, [r7, #8]
 	  }
 	  if(hour >= 12){
- 80001f4:	68bb      	ldr	r3, [r7, #8]
- 80001f6:	2b0b      	cmp	r3, #11
- 80001f8:	dd01      	ble.n	80001fe <main+0xb2>
+ 80001f2:	68bb      	ldr	r3, [r7, #8]
+ 80001f4:	2b0b      	cmp	r3, #11
+ 80001f6:	dd01      	ble.n	80001fc <main+0xb0>
 		  hour = 0;
- 80001fa:	2300      	movs	r3, #0
- 80001fc:	60bb      	str	r3, [r7, #8]
+ 80001f8:	2300      	movs	r3, #0
+ 80001fa:	60bb      	str	r3, [r7, #8]
 	  }
 	  clearAllClock();
- 80001fe:	f000 f877 	bl	80002f0 <clearAllClock>
+ 80001fc:	f000 f878 	bl	80002f0 <clearAllClock>
 	  setNumberOnClock(hour);
- 8000202:	e7c9      	b.n	8000198 <main+0x4c>
+ 8000200:	e7ca      	b.n	8000198 <main+0x4c>
+ 8000202:	bf00      	nop
  8000204:	20000000 	.word	0x20000000
  8000208:	20000030 	.word	0x20000030
  800020c:	66666667 	.word	0x66666667
