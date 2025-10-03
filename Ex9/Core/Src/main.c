@@ -97,7 +97,6 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   int idx = 0;
-  HAL_Delay(1000);
   while(idx <= 11)
   {
 	  HAL_GPIO_WritePin(LED_PORTS[idx], LED_PINS[idx], RESET);
@@ -113,6 +112,7 @@ int main(void)
     /* USER CODE END WHILE */
 	 if(idx >= 12)
 	 {
+		 HAL_Delay(1000);
 		 idx = 0;
 		  while(idx <= 11)
 		  {
@@ -121,9 +121,9 @@ int main(void)
 		  }
 		  idx = 0;
 	 }
+	 HAL_Delay(1000);
 	 clearNumberOnClock(idx);
 	 idx++;
-	 HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
